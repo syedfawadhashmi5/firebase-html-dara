@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Your head content remains unchanged -->
+    <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
     <!-- Your content to display data -->
-    <div id="dataContainer"></div>
+    <div class="data-show">
+        <h4 style="color:red;margin:0px;text-align:center;">Running...</h4>
+        <h2 style="margin:0px;text-align:center;">All Data</h2>
+        <div id="dataContainer"></div>
+    </div>
 
     <!-- Include Firebase SDK and your configuration -->
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
@@ -13,14 +20,14 @@
     <script>
         // Your Firebase configuration and initialization code (same as in index.html)
         const firebaseConfig = {
-      apiKey: "AIzaSyB2heDmSZnCAo2wesbIYGfibU3r0ERji7c",
-      authDomain: "dataapp-1cc92.firebaseapp.com",
-      projectId: "dataapp-1cc92",
-      storageBucket: "dataapp-1cc92.appspot.com",
-      messagingSenderId: "842942560914",
-      appId: "1:842942560914:web:751f7c1434d5032cb2444b",
-      measurementId: "G-FJ634LE6MZ"
-    };
+            apiKey: "AIzaSyB2heDmSZnCAo2wesbIYGfibU3r0ERji7c",
+            authDomain: "dataapp-1cc92.firebaseapp.com",
+            projectId: "dataapp-1cc92",
+            storageBucket: "dataapp-1cc92.appspot.com",
+            messagingSenderId: "842942560914",
+            appId: "1:842942560914:web:751f7c1434d5032cb2444b",
+            measurementId: "G-FJ634LE6MZ"
+        };
         firebase.initializeApp(firebaseConfig);
 
         // Function to fetch and display data
@@ -28,21 +35,31 @@
             const firestore = firebase.firestore();
             const submissionsCollection = firestore.collection('formSubmissions');
 
-            try {
-                const querySnapshot = await submissionsCollection.get();
+            // Real-time listener for data changes with explicit ordering by timestamp in descending order
+            submissionsCollection.orderBy('timestamp', 'desc').onSnapshot((snapshot) => {
                 const dataContainer = document.getElementById('dataContainer');
-                
-                querySnapshot.forEach((doc) => {
+                dataContainer.innerHTML = ''; // Clear existing data
+
+                snapshot.forEach((doc) => {
                     const data = doc.data();
-                    dataContainer.innerHTML += `<p>${JSON.stringify(data)}</p>`;
+                    const div = document.createElement('div');
+
+                    for (const [key, value] of Object.entries(data)) {
+                        div.innerHTML +=
+                            `<p class="${key}"><span>${key}:</span> <span style="color:blue">${value}</span></p>`;
+                    }
+
+                    // Append the new div at the end of dataContainer
+                    dataContainer.appendChild(div);
                 });
-            } catch (error) {
+            }, (error) => {
                 console.error('Error fetching data: ', error);
-            }
+            });
         }
 
         // Call the displayData function when the page loads
         window.onload = displayData;
     </script>
 </body>
+
 </html>

